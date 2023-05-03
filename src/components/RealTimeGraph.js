@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Line } from "react-chartjs-2";
+import Chart from "react-apexcharts";
+import "./RealTimeGraph.css";
 
 const RealTimeGraph = () => {
   const [data, setData] = useState([]);
 
   const updateData = () => {
-    const x = new Date();
+    const x = new Date().getTime();
     const y = Math.sin(x);
     setData((prevData) => [...prevData, { x, y }]);
   };
@@ -15,40 +16,43 @@ const RealTimeGraph = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const chartData = {
-    labels: data.map((d) => d.x),
-    datasets: [
-      {
-        label: "Real-time sine wave",
-        data: data.map((d) => d.y),
-        fill: false,
-        borderColor: "rgba(75,192,192,1)",
-      },
-    ],
-  };
-
   const chartOptions = {
-    scales: {
-      xAxes: [
-        {
-          type: "time",
-          time: {
-            unit: "second",
-          },
-        },
-      ],
-      yAxes: [
-        {
-          ticks: {
-            min: -1,
-            max: 1,
-          },
-        },
-      ],
+    chart: {
+      type: "line",
+      toolbar: {
+        show: false,
+      },
+      animations: {
+        enabled: false,
+      },
+      zoom: {
+        enabled: false,
+      },
+    },
+    xaxis: {
+      type: "datetime",
+    },
+    yaxis: {
+      min: -1,
+      max: 1,
+    },
+    dataLabels: {
+      enabled: false,
     },
   };
 
-  return <Line data={chartData} options={chartOptions} />;
+  const series = [
+    {
+      name: "Real-time sine wave",
+      data: data,
+    },
+  ];
+
+  return (
+    <div className="chart-wrapper">
+      <Chart options={chartOptions} series={series} type="line" />
+    </div>
+  );
 };
 
 export default RealTimeGraph;

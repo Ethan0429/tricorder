@@ -4,12 +4,12 @@ import RealTimeGraph from "./components/RealTimeGraph";
 import PercentageCircle from "./components/PercentageCircle";
 
 const App = () => {
-  const dummyPercentage = 65;
+  const dummyPercentage = 25;
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Real-time Graph and Percentage Circle</h1>
+        <h1>Tricorder Readings</h1>
       </header>
       <main>
         <RealTimeGraph />
