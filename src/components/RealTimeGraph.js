@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import "./RealTimeGraph.css";
 
-const RealTimeGraph = () => {
+const RealTimeGraph = ({ onDataUpdate }) => {
   const [data, setData] = useState([]);
 
   const updateData = () => {
     const x = new Date().getTime();
     const y = Math.sin(x);
     setData((prevData) => [...prevData, { x, y }]);
+    onDataUpdate(y);
   };
 
   useEffect(() => {
@@ -35,6 +36,12 @@ const RealTimeGraph = () => {
     yaxis: {
       min: -1,
       max: 1,
+      tickAmount: 10,
+      labels: {
+        formatter: function (value) {
+          return value.toFixed(2);
+        },
+      },
     },
     dataLabels: {
       enabled: false,

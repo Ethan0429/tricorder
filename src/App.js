@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import RealTimeGraph from "./components/RealTimeGraph";
 import PercentageCircle from "./components/PercentageCircle";
 
 const App = () => {
-  const dummyPercentage = 25;
+  const [percentage, setPercentage] = useState(0);
+
+  const updatePercentage = (value) => {
+    setPercentage(Math.abs(Math.round(value * 100)));
+  };
 
   return (
     <div className="App">
@@ -12,8 +16,10 @@ const App = () => {
         <h1>Tricorder Readings</h1>
       </header>
       <main>
-        <RealTimeGraph />
-        <PercentageCircle percentage={dummyPercentage} />
+        <div className="graph-container">
+          <RealTimeGraph onDataUpdate={updatePercentage} />
+        </div>
+        <PercentageCircle percentage={percentage} />
       </main>
     </div>
   );
