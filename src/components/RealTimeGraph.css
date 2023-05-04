@@ -3,7 +3,7 @@
   max-width: 800px;
   display: flex;
   justify-content: center;
-  transform: translateX(-22px);
+  transform: translateX(-26px);
 }
 
 /* Add the following media queries to adjust the chart size for different screen sizes */
