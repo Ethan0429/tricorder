@@ -16,9 +16,7 @@ const App = () => {
         <h1>Tricorder Readings</h1>
       </header>
       <main>
-        <div className="graph-container">
-          <RealTimeGraph onDataUpdate={updatePercentage} />
-        </div>
+        <RealTimeGraph onDataUpdate={updatePercentage} />
         <PercentageCircle percentage={percentage} />
       </main>
     </div>

@@ -5,10 +5,17 @@ import "./RealTimeGraph.css";
 const RealTimeGraph = ({ onDataUpdate }) => {
   const [data, setData] = useState([]);
 
+  const maxDataPoints = 20; // Define the maximum number of data points to display
+
   const updateData = () => {
     const x = new Date().getTime();
     const y = Math.sin(x);
-    setData((prevData) => [...prevData, { x, y }]);
+    setData((prevData) => {
+      // Remove the oldest data point when maxDataPoints is reached
+      const newData =
+        prevData.length >= maxDataPoints ? prevData.slice(1) : prevData;
+      return [...newData, { x, y }];
+    });
     onDataUpdate(y);
   };
 
@@ -19,6 +26,7 @@ const RealTimeGraph = ({ onDataUpdate }) => {
 
   const chartOptions = {
     chart: {
+      id: "realtime",
       type: "line",
       toolbar: {
         show: false,
@@ -46,6 +54,54 @@ const RealTimeGraph = ({ onDataUpdate }) => {
     dataLabels: {
       enabled: false,
     },
+    grid: {
+      padding: {
+        left: 10, // Add this line
+        right: 10, // Add this line
+      },
+    },
+    responsive: [
+      {
+        breakpoint: 1921,
+        options: {
+          chart: {
+            width: "190%", // Add this line
+          },
+        },
+      },
+      {
+        breakpoint: 1200,
+        options: {
+          chart: {
+            width: 700,
+          },
+        },
+      },
+      {
+        breakpoint: 992,
+        options: {
+          chart: {
+            width: 550,
+          },
+        },
+      },
+      {
+        breakpoint: 768,
+        options: {
+          chart: {
+            width: 450,
+          },
+        },
+      },
+      {
+        breakpoint: 576,
+        options: {
+          chart: {
+            width: 300,
+          },
+        },
+      },
+    ],
   };
 
   const series = [
