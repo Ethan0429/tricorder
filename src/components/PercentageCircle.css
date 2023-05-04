@@ -24,6 +24,7 @@
 
 .circle-fg {
   stroke: #4bc0c0;
+  transition: all 0.2s ease-in-out;
 }
 
 .circle-text {
