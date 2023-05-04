@@ -5,7 +5,8 @@ import "./RealTimeGraph.css";
 const RealTimeGraph = ({ onDataUpdate }) => {
   const [data, setData] = useState([]);
 
-  const maxDataPoints = 20; // Define the maximum number of data points to display
+  const maxDataPoints = 100; // Define the maximum number of data points to display, relative to time interval
+  const updateInterval = 200; // Define how often the chart should update in milliseconds
 
   const updateData = () => {
     const x = new Date().getTime();
@@ -20,7 +21,7 @@ const RealTimeGraph = ({ onDataUpdate }) => {
   };
 
   useEffect(() => {
-    const interval = setInterval(updateData, 1000);
+    const interval = setInterval(updateData, updateInterval);
     return () => clearInterval(interval);
   }, []);
 
@@ -29,10 +30,11 @@ const RealTimeGraph = ({ onDataUpdate }) => {
       id: "realtime",
       type: "line",
       toolbar: {
-        show: false,
+        show: true,
       },
       animations: {
         enabled: false,
+        easing: "linear",
       },
       zoom: {
         enabled: false,
@@ -44,7 +46,7 @@ const RealTimeGraph = ({ onDataUpdate }) => {
     yaxis: {
       min: -1,
       max: 1,
-      tickAmount: 10,
+      tickAmount: 8,
       labels: {
         formatter: function (value) {
           return value.toFixed(2);
