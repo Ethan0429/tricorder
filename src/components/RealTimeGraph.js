@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import "./RealTimeGraph.css";
 
-const RealTimeGraph = ({ onDataUpdate }) => {
+const RealTimeGraph = ({ onDataUpdate, y }) => {
   const [data, setData] = useState([]);
 
   const maxDataPoints = 100; // Define the maximum number of data points to display, relative to time interval
@@ -10,7 +10,6 @@ const RealTimeGraph = ({ onDataUpdate }) => {
 
   const updateData = () => {
     const x = new Date().getTime();
-    const y = Math.sin(x);
     setData((prevData) => {
       // Remove the oldest data point when maxDataPoints is reached
       const newData =
