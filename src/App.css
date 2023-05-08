@@ -29,3 +29,28 @@ main {
     align-items: center;
   }
 }
+
+/* Add this to your App.css file */
+
+.centered-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: auto;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  touch-action: pan-y;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
